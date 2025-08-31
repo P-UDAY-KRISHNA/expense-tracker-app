@@ -74,7 +74,7 @@ export const GlobalProvider = ({ children }) => {
   async function getTransactions() {
     if (initialState.transactions.length === 0) {
       try {
-        const res = await axios.get('/api/v1/transactions');
+        const res = await axios.get('https://your-backend-url.onrender.com/api/v1/transactions');
         dispatch({
           type: 'GET_TRANSACTIONS',
           payload: res.data.data
