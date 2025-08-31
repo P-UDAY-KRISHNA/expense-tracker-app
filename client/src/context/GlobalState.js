@@ -127,7 +127,7 @@ export const GlobalProvider = ({ children }) => {
   async function resetTransactions() {
     if (window.confirm('Are you sure you want to delete all transactions? This cannot be undone.')) {
       try {
-        await axios.delete('/api/v1/transactions');
+        await axios.delete('https://expense-tracker-app-2h6s.onrender.com/api/v1/transactions');
         dispatch({
           type: 'RESET_TRANSACTIONS'
         });
