@@ -114,7 +114,8 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteTransaction(id) {
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      // This line is now correct
+      await axios.delete(`${API_URL}/${id}`); 
       dispatch({
         type: 'DELETE_TRANSACTION',
         payload: id
