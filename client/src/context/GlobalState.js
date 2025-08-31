@@ -1,6 +1,9 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import axios from 'axios';
 
+// Your live backend API URL
+const API_URL = 'https://expense-tracker-app-2h6s.onrender.com/api/v1/transactions';
+
 const AppReducer = (state, action) => {
   let newState;
   switch (action.type) {
@@ -74,7 +77,7 @@ export const GlobalProvider = ({ children }) => {
   async function getTransactions() {
     if (initialState.transactions.length === 0) {
       try {
-        const res = await axios.get('https://expense-tracker-app-2h6s.onrender.com/api/v1/transactions');
+        const res = await axios.get(API_URL);
         dispatch({
           type: 'GET_TRANSACTIONS',
           payload: res.data.data
@@ -96,7 +99,7 @@ export const GlobalProvider = ({ children }) => {
   async function addTransaction(transaction) {
     const config = { headers: { 'Content-Type': 'application/json' } };
     try {
-      const res = await axios.post('https://expense-tracker-app-2h6s.onrender.com/api/v1/transactions', transaction, config);
+      const res = await axios.post(API_URL, transaction, config);
       dispatch({
         type: 'ADD_TRANSACTION',
         payload: res.data.data
@@ -111,7 +114,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteTransaction(id) {
     try {
-      await axios.delete(`https://expense-tracker-app-2h6s.onrender.com/api/v1/transactions${id}`);
+      await axios.delete(`${API_URL}/${id}`);
       dispatch({
         type: 'DELETE_TRANSACTION',
         payload: id
@@ -127,7 +130,7 @@ export const GlobalProvider = ({ children }) => {
   async function resetTransactions() {
     if (window.confirm('Are you sure you want to delete all transactions? This cannot be undone.')) {
       try {
-        await axios.delete('https://expense-tracker-app-2h6s.onrender.com/api/v1/transactions');
+        await axios.delete(API_URL);
         dispatch({
           type: 'RESET_TRANSACTIONS'
         });
