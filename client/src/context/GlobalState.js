@@ -74,7 +74,7 @@ export const GlobalProvider = ({ children }) => {
   async function getTransactions() {
     if (initialState.transactions.length === 0) {
       try {
-        const res = await axios.get('https://your-backend-url.onrender.com/api/v1/transactions');
+        const res = await axios.get('https://expense-tracker-app-2h6s.onrender.com/api/v1/transactions');
         dispatch({
           type: 'GET_TRANSACTIONS',
           payload: res.data.data
@@ -96,7 +96,7 @@ export const GlobalProvider = ({ children }) => {
   async function addTransaction(transaction) {
     const config = { headers: { 'Content-Type': 'application/json' } };
     try {
-      const res = await axios.post('/api/v1/transactions', transaction, config);
+      const res = await axios.post('https://expense-tracker-app-2h6s.onrender.com/api/v1/transactions', transaction, config);
       dispatch({
         type: 'ADD_TRANSACTION',
         payload: res.data.data
@@ -111,7 +111,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteTransaction(id) {
     try {
-      await axios.delete(`/api/v1/transactions/${id}`);
+      await axios.delete(`https://expense-tracker-app-2h6s.onrender.com/api/v1/transactions${id}`);
       dispatch({
         type: 'DELETE_TRANSACTION',
         payload: id
